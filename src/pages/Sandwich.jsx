@@ -160,7 +160,7 @@ function SandwichUnlimited({ contestants, colorblind }) {
         )}
       </div>
       <p style={{ textAlign: "center", color: "var(--text3)", fontSize: "12px", marginBottom: "16px" }}>
-        Unlimited includes every season, note that these placements reflect *ORDER OF ELIMINATION*, not voted-out order.
+        Unlimited includes every season, note that these placements reflect *final* placements.
       </p>
       <SandwichGame
         key={gameKey}
@@ -306,7 +306,7 @@ export default function Sandwich({ contestants, colorblind }) {
   const location = useLocation();
 
   useSEO({
-    title: "Survivordle Sandwich — Guess Who Placed Between",
+    title: "Survivordle Sandwich: Guess Who Placed Between",
     description: "Two castaways, one mystery between them. Guess the Survivor castaway sandwiched between two placements in 4 tries.",
     canonical: "https://survivordle.com/sandwich",
   });

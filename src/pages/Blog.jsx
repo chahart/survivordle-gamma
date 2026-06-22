@@ -91,8 +91,8 @@ const BLOG_CSS = `
 
 export default function Blog() {
   useSEO({
-    title: "Blog — Survivordle",
-    description: "Articles from the creator of Survivordle — behind the scenes, Survivor data, and updates on the game.",
+    title: "Blog | Survivordle",
+    description: "Articles from the creator of Survivordle: behind the scenes, Survivor data, and updates on the game.",
     canonical: "https://survivordle.com/blog",
   });
 

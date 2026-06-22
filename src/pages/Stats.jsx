@@ -438,8 +438,8 @@ export default function Stats() {
   useEffect(() => { loadDaily(); loadGlobal(); }, []);
 
   useSEO({
-    title: "Stats — Survivordle",
-    description: "Survivordle statistics — your personal stats, today's difficulty rating, and global player data.",
+    title: "Stats | Survivordle",
+    description: "Survivordle statistics: your personal stats, today's difficulty rating, and global player data.",
     canonical: "https://survivordle.com/stats",
   });
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { normalize } from "../shared/gameLogic";
 import { SANDWICH_MAX_GUESSES, getNeighborPlacements } from "../shared/sandwichLogic";
-import { logSolveEvent } from "../shared/supabase";
+import { logSandwichEvent } from "../shared/supabase";
 
 const TRIBE_COLOR_MAP = {
   "Black":       "#333333",
@@ -50,6 +50,8 @@ export default function SandwichGame({
   const [activeIdx,      setActiveIdx]      = useState(-1);
   const [error,          setError]          = useState("");
   const [copied,         setCopied]         = useState(false);
+  const [settling,       setSettling]       = useState(false);
+  const [hintsVisible,   setHintsVisible]   = useState(initialGuesses?.length > 0 ? initialGuesses.length : 0);
 
   // Debounce search input — only filter after 150ms pause in typing
   useEffect(() => {
@@ -81,10 +83,12 @@ export default function SandwichGame({
   const neighbors = useMemo(() => getNeighborPlacements(contestants, answer), [contestants, answer]);
 
   function finish(newGuesses, didWin) {
-    logSolveEvent({
+    logSandwichEvent({
       puzzle: `${answer.name} - ${answer.seasonNameFull}`,
+      season: answer.season,
+      placedBefore: answer.placedBefore,
+      placedAfter: answer.placedAfter,
       guesses: newGuesses.length,
-      hints: newGuesses.length > 1,
       won: didWin,
       mode,
       firstGuess: newGuesses[0] ? `${newGuesses[0].name} - ${newGuesses[0].seasonNameFull}` : null,
@@ -94,7 +98,7 @@ export default function SandwichGame({
   }
 
   function submitGuess(c) {
-    if (!c || gameOver) return;
+    if (!c || gameOver || settling) return;
     if (guesses.some(g => g.id === c.id)) {
       setError("Already guessed that appearance!");
       return;
@@ -106,10 +110,19 @@ export default function SandwichGame({
     const didWin  = isCorrect(c);
     const didFail = !didWin && newGuesses.length >= SANDWICH_MAX_GUESSES;
     if (didWin || didFail) {
-      if (didWin) setWon(true);
-      setGameOver(true);
-      finish(newGuesses, didWin);
+      setSettling(true);
+      setTimeout(() => {
+        if (didWin) setWon(true);
+        setGameOver(true);
+        setSettling(false);
+        finish(newGuesses, didWin);
+      }, 1000);
     } else {
+      setSettling(true);
+      setTimeout(() => {
+        setHintsVisible(newGuesses.length);
+        setSettling(false);
+      }, 400);
       onMidGame?.({ guesses: newGuesses });
     }
   }
@@ -146,7 +159,7 @@ export default function SandwichGame({
     .status-banner.win    { background: #0a1a3a; border: 1px solid #4a8aff; color: #b0d0ff; }
   ` : "";
 
-  const showPlacements = missCount >= 1 || gameOver;
+  const showPlacements = hintsVisible >= 1 || gameOver;
 
   return (
     <div>
@@ -170,14 +183,14 @@ export default function SandwichGame({
         </div>
       </div>
 
-      {/* Hints revealed after each miss */}
-      {missCount >= 1 && (
+      {/* Hints revealed after each miss — staggered via hintsVisible */}
+      {hintsVisible >= 1 && (
         <div className="hint-panels">
           <div className="hint-panel">
             <div className="hint-panel-label">Season</div>
             <div className="hint-panel-value">{answer.seasonNameFull}</div>
           </div>
-          {missCount >= 2 && (
+          {hintsVisible >= 2 && (
             <div className="hint-panel">
               <div className="hint-panel-label">Starting Tribe</div>
               <div className="hint-panel-value">
@@ -186,7 +199,7 @@ export default function SandwichGame({
               </div>
             </div>
           )}
-          {missCount >= 3 && (
+          {hintsVisible >= 3 && (
             <div className="hint-panel">
               <div className="hint-panel-label">Age &amp; Gender</div>
               <div className="hint-panel-value">{answer.age ?? "?"} · {answer.gender}</div>
@@ -201,9 +214,10 @@ export default function SandwichGame({
           <div className="search-wrap">
             <input
               className="search-input"
-              placeholder="Search by castaway name…"
+              placeholder={settling ? "..." : "Search by castaway name…"}
               value={query}
               autoComplete="off"
+              disabled={settling}
               onChange={e => { setQuery(e.target.value); setActiveIdx(-1); }}
               onKeyDown={handleKeyDown}
             />

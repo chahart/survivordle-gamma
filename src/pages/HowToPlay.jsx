@@ -191,7 +191,7 @@ export default function HowToPlay() {
     document.title = "How to Play | Survivordle";
     let meta = document.querySelector('meta[name="description"]');
     if (!meta) { meta = document.createElement("meta"); meta.name = "description"; document.head.appendChild(meta); }
-    meta.content = "Learn how to play Survivordle — the daily Survivor castaway guessing game. Understand every column, hint, and scoring rule.";
+    meta.content = "Learn how to play Survivordle, the daily Survivor castaway guessing game. Understand every column, hint, and scoring rule.";
     let canon = document.querySelector('link[rel="canonical"]');
     if (!canon) { canon = document.createElement("link"); canon.rel = "canonical"; document.head.appendChild(canon); }
     canon.href = "https://survivordle.com/how-to-play";

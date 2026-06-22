@@ -12,8 +12,8 @@ export default function Unlimited({ contestants, colorblind }) {
   const [gameOver,  setGameOver]  = useState(false);
   const [activeTab, setActiveTab] = useState("play");
   useSEO({
-    title: "Survivordle Unlimited — Play as Many as You Like",
-    description: "No limits — play Survivordle with random Survivor castaways as many times as you want.",
+    title: "Unlimited Mode | Survivordle",
+    description: "No limits. Play Survivordle with random Survivor castaways as many times as you want.",
     canonical: "https://survivordle.com/unlimited",
   });
   const newGame = useCallback(() => {

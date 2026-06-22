@@ -10,7 +10,7 @@ export default function Archive({ contestants, colorblind }) {
   const navigate = useNavigate();
   const puzzleNum = getPuzzleNumber();
   useSEO({
-    title: "Survivordle Archive — Past Daily Puzzles",
+    title: "Past Daily Puzzles | Survivordle",
     description: "Play any past Survivordle puzzle. Browse and replay every daily castaway puzzle from the beginning.",
     canonical: "https://survivordle.com/archive",
   });

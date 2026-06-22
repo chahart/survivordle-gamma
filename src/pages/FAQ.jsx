@@ -323,8 +323,8 @@ function FAQItem({ q, a }) {
 
 export default function FAQ() {
   useSEO({
-    title: "FAQ — Survivordle",
-    description: "Frequently asked questions about Survivordle — the daily Survivor castaway guessing game. Get answers about gameplay, scoring, streaks, and more.",
+    title: "FAQ | Survivordle",
+    description: "Frequently asked questions about Survivordle, the daily Survivor castaway guessing game. Get answers about gameplay, scoring, streaks, and more.",
     canonical: "https://survivordle.com/faq",
   });
 

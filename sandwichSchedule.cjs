@@ -9,8 +9,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const SEED = 20260612;
-const START_DATE = "2026-06-12";
+const SEED = 20260623;
+const START_DATE = "2026-06-23";
 const EXCLUDED_SEASONS = new Set([7, 22, 23, 27, 38, 40]);
 
 const CONTESTANTS_PATH = path.join(__dirname, "public", "contestants.json");

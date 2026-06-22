@@ -685,11 +685,11 @@ export default function BlogPost() {
   const Content = POST_CONTENT[slug];
 
   useSEO(post ? {
-    title: `${post.title} — Survivordle Blog`,
+    title: `${post.title} | Survivordle Blog`,
     description: post.description,
     canonical: `https://survivordle.com/blog/${slug}`,
   } : {
-    title: "Post Not Found — Survivordle",
+    title: "Post Not Found | Survivordle",
     description: "",
     canonical: `https://survivordle.com/blog`,
   });

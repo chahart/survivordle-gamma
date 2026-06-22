@@ -13,8 +13,8 @@ export default function Daily({ contestants, colorblind }) {
   const navigate  = useNavigate();
   const puzzleNum = getPuzzleNumber();
   useSEO({
-    title: "Survivordle — Daily Survivor Castaway Puzzle",
-    description: "Guess today's Survivor castaway in 8 tries. A new puzzle every day — test your Survivor knowledge!",
+    title: "Survivordle: Daily Survivor Castaway Puzzle",
+    description: "Guess today's Survivor castaway in 8 tries. A new puzzle every day. Test your Survivor knowledge!",
     canonical: "https://survivordle.com/",
   });
 

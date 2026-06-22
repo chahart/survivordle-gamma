@@ -1018,8 +1018,8 @@ export default function Recall({ contestants }) {
   const location = useLocation();
 
   useSEO({
-    title: "Survivordle Recall — Name the Castaway's Stats",
-    description: "The reverse of Survivordle — you see the castaway's name, you recall their stats from memory.",
+    title: "Survivordle Recall: Name the Castaway's Stats",
+    description: "The reverse of Survivordle: you see the castaway's name, you recall their stats from memory.",
     canonical: "https://survivordle.com/recall",
   });
 

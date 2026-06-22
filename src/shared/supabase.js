@@ -65,6 +65,38 @@ export async function logRecallEvent({
   }
 }
 
+export async function logSandwichEvent({
+  puzzle, season, placedBefore, placedAfter,
+  guesses, won, mode, firstGuess, secondGuess,
+}) {
+  try {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, "0");
+    const h = now.getHours();
+    const timestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} `
+      + `${pad(h % 12 || 12)}:${pad(now.getMinutes())}${h < 12 ? "am" : "pm"}`;
+    await fetch(`${SUPABASE_URL}/rest/v1/sandwich_events`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "Prefer": "return=minimal",
+      },
+      body: JSON.stringify({
+        puzzle, season,
+        placed_before: placedBefore,
+        placed_after: placedAfter,
+        guesses, won, mode, timestamp,
+        first_guess: firstGuess || null,
+        second_guess: secondGuess || null,
+      }),
+    });
+  } catch {
+    // Fail silently — never disrupt gameplay
+  }
+}
+
 export async function fetchUnlimitedStats() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_unlimited_stats`, {

@@ -3,7 +3,7 @@ import useSEO from "../shared/useSEO";
 
 export default function About() {
   useSEO({
-    title: "About Survivordle — Daily Survivor Castaway Guessing Game",
+    title: "About Survivordle",
     description: "Survivordle is a free daily guessing game for Survivor fans. Learn how to play, meet the creator, and find out what makes each puzzle tick.",
     canonical: "https://survivordle.com/about",
   });
