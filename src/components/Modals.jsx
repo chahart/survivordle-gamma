@@ -12,7 +12,7 @@ export function AnnouncementModal({ onClose, onPlaySandwich }) {
           Two castaways from the same season: one placed above, one below. Can you name the castaway sandwiched between them in <strong>4 guesses</strong>? Each miss reveals a new hint: season, tribe, then age &amp; gender.
         </p>
         <p className="modal-body">
-          Play daily, revisit past puzzles in the archive, or go unlimited for endless practice.
+          Play daily, revisit past puzzles in the archive, or go unlimited for endless practice!
         </p>
 
         <button className="play-recall-btn" onClick={onPlaySandwich}>
