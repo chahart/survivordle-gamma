@@ -16,6 +16,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Recall from "./pages/Recall";
 import Sandwich from "./pages/Sandwich";
+import BB from "./pages/BB";
 import { AnnouncementModal } from "./components/Modals";
 
 const BANNER_KEY = "survivordle_announcement_sandwich_jun23";
@@ -103,6 +104,7 @@ export default function App() {
             <Route path="/sandwich/archive"   element={<Sandwich contestants={contestants} colorblind={colorblind} />} />
             <Route path="/sandwich/unlimited" element={<Sandwich contestants={contestants} colorblind={colorblind} />} />
             <Route path="/sandwich/stats"     element={<Sandwich contestants={contestants} colorblind={colorblind} />} />
+            <Route path="/bb"                 element={<BB />} />
           </Routes>
         </div>
 
